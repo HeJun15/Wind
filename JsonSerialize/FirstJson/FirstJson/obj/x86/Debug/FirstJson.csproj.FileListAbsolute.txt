@@ -1,0 +1,7 @@
+d:\Users\hejun\Desktop\JsonSerialize\FirstJson\FirstJson\bin\Debug\FirstJson.exe
+d:\Users\hejun\Desktop\JsonSerialize\FirstJson\FirstJson\bin\Debug\FirstJson.pdb
+d:\Users\hejun\Desktop\JsonSerialize\FirstJson\FirstJson\bin\Debug\Newtonsoft.Json.dll
+d:\Users\hejun\Desktop\JsonSerialize\FirstJson\FirstJson\bin\Debug\Newtonsoft.Json.xml
+d:\Users\hejun\Desktop\JsonSerialize\FirstJson\FirstJson\obj\x86\Debug\FirstJson.csprojResolveAssemblyReference.cache
+d:\Users\hejun\Desktop\JsonSerialize\FirstJson\FirstJson\obj\x86\Debug\FirstJson.exe
+d:\Users\hejun\Desktop\JsonSerialize\FirstJson\FirstJson\obj\x86\Debug\FirstJson.pdb
