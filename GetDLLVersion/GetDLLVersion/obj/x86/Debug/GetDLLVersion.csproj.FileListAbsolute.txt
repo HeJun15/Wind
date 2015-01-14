@@ -3,3 +3,8 @@ d:\Users\hejun\Desktop\GetDLLVersion\GetDLLVersion\bin\Debug\GetDLLVersion.pdb
 d:\Users\hejun\Desktop\GetDLLVersion\GetDLLVersion\obj\x86\Debug\GetDLLVersion.exe
 d:\Users\hejun\Desktop\GetDLLVersion\GetDLLVersion\obj\x86\Debug\GetDLLVersion.pdb
 d:\Users\hejun\Desktop\GetDLLVersion\GetDLLVersion\obj\x86\Debug\GetDLLVersion.csprojResolveAssemblyReference.cache
+d:\Users\hejun\Desktop\Wind\GetDLLVersion\GetDLLVersion\obj\x86\Debug\GetDLLVersion.exe
+d:\Users\hejun\Desktop\Wind\GetDLLVersion\GetDLLVersion\obj\x86\Debug\GetDLLVersion.pdb
+d:\Users\hejun\Desktop\Wind\GetDLLVersion\GetDLLVersion\bin\Debug\GetDLLVersion.exe
+d:\Users\hejun\Desktop\Wind\GetDLLVersion\GetDLLVersion\bin\Debug\GetDLLVersion.pdb
+d:\Users\hejun\Desktop\Wind\GetDLLVersion\GetDLLVersion\obj\x86\Debug\GetDLLVersion.csprojResolveAssemblyReference.cache
