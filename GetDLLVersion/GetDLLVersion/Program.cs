@@ -12,10 +12,10 @@ namespace GetDLLVersion
     {
         static void Main(string[] args)
         {
-            string file = @"D:\Ground\Activity\Booking\BookingJobWS\Activity.Booking.BookingJobWS\bin\Debug";
-            string shortfile = "BookingJobWS_Activity.Booking.BookingJobWS";
+            string file = @"D:\Ground\Activity\Vendor\VendorService\Activity.Vendor.VendorService.Contract\bin\Debug";
+            string shortfile = "VendorService_Activity.Vendor.VendorService.Contract";
 
-            string pathfile = @"D:\Ground\Activity\Booking\BookingJobWS\Activity.Booking.BookingJobWS";
+            string pathfile = @"D:\Ground\Activity\Vendor\VendorService\Activity.Vendor.VendorService.Contract";
 
             StreamWriter sw = new StreamWriter(@"d:\Users\hejun\Desktop\" + shortfile + ".csv", false, System.Text.UTF8Encoding.UTF8);
             Console.SetOut(sw);
@@ -66,21 +66,28 @@ namespace GetDLLVersion
                 {
                     FileVersionInfo myFileVersion = FileVersionInfo.GetVersionInfo(fi.FullName);
                     string dllName = fi.Name;
+                    string dllFullName = fi.FullName;
                     string Text = myFileVersion.FileVersion;
-                    string tmp = "";
+                    string tmp = "NULL";
                     for (int i = 0; i < dllpath.Count; i++)
                     {
                         if (dllpath[i].Contains(dllName))
                         {
                             tmp = dllpath[i];
-                            dllpath[i] = "null";
+                            dllpath.Remove(dllpath[i]);
                             break;
                         }
                         else
                             tmp = "NULL";
                     }
 
-                    Console.WriteLine(dllName + "," + Text + "," + tmp);
+                    string regexStr = "Vendor.*";
+                    Regex reg = new Regex(regexStr);
+                    Match mc = reg.Match(dllFullName);
+
+                    dllFullName = mc.Value;
+
+                    Console.WriteLine(dllName + "," + Text + "," + tmp + "," + dllFullName);
                 }
             }
         }
