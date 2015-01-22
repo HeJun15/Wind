@@ -1,0 +1,23 @@
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\bin\Debug\Json序列化测试.exe.config
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\bin\Debug\Json序列化测试.exe
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\bin\Debug\Json序列化测试.pdb
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\obj\Debug\Json序列化测试.exe
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\obj\Debug\Json序列化测试.pdb
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\bin\Debug\fastJSON.dll
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\bin\Debug\fastJSON.pdb
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\bin\Debug\Newtonsoft.Json.dll
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\bin\Debug\CRedis.Client.dll
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\bin\Debug\Arch.CFX.dll
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\bin\Debug\CServiceStack.Mega.dll
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\bin\Debug\CServiceStack.Mega.pdb
+d:\users\wusq@ctrip.com\documents\visual studio 2013\Projects\Json序列化测试\Json序列化测试\obj\Debug\Json序列化测试.csprojResolveAssemblyReference.cache
+d:\Users\hejun\Desktop\Json序列化测试\Json序列化测试\bin\Debug\Json序列化测试.exe.config
+d:\Users\hejun\Desktop\Json序列化测试\Json序列化测试\obj\Debug\Json序列化测试.exe
+d:\Users\hejun\Desktop\Json序列化测试\Json序列化测试\obj\Debug\Json序列化测试.pdb
+d:\Users\hejun\Desktop\Json序列化测试\Json序列化测试\bin\Debug\Json序列化测试.exe
+d:\Users\hejun\Desktop\Json序列化测试\Json序列化测试\bin\Debug\Json序列化测试.pdb
+d:\Users\hejun\Desktop\Json序列化测试\Json序列化测试\bin\Debug\Newtonsoft.Json.dll
+d:\Users\hejun\Desktop\Json序列化测试\Json序列化测试\bin\Debug\Arch.CFX.dll
+d:\Users\hejun\Desktop\Json序列化测试\Json序列化测试\bin\Debug\CServiceStack.Mega.pdb
+d:\Users\hejun\Desktop\Json序列化测试\Json序列化测试\bin\Debug\fastJSON.pdb
+d:\Users\hejun\Desktop\Json序列化测试\Json序列化测试\obj\Debug\Json序列化测试.csprojResolveAssemblyReference.cache
