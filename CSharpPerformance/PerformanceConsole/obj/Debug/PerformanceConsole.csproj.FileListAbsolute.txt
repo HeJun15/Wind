@@ -1,0 +1,17 @@
+D:\WorkZone\201501\Dump\CSharpPerformance\PerformanceConsole\bin\Debug\PerformanceConsole.exe
+D:\WorkZone\201501\Dump\CSharpPerformance\PerformanceConsole\bin\Debug\PerformanceConsole.pdb
+D:\WorkZone\201501\Dump\CSharpPerformance\PerformanceConsole\obj\Debug\PerformanceConsole.exe
+D:\WorkZone\201501\Dump\CSharpPerformance\PerformanceConsole\obj\Debug\PerformanceConsole.pdb
+D:\WorkZone\201501\Dump\CSharpPerformance\PerformanceConsole\obj\Debug\PerformanceConsole.csprojResolveAssemblyReference.cache
+E:\WorkZone\201501\Training\CSharpPerformance\CSharpPerformance\PerformanceConsole\obj\Debug\PerformanceConsole.exe
+E:\WorkZone\201501\Training\CSharpPerformance\CSharpPerformance\PerformanceConsole\obj\Debug\PerformanceConsole.pdb
+E:\WorkZone\201501\Training\CSharpPerformance\CSharpPerformance\PerformanceConsole\bin\Debug\PerformanceConsole.exe
+E:\WorkZone\201501\Training\CSharpPerformance\CSharpPerformance\PerformanceConsole\bin\Debug\PerformanceConsole.pdb
+E:\WorkZone\201501\Training\CSharpPerformance\CSharpPerformance\PerformanceConsole\obj\Debug\PerformanceConsole.csprojResolveAssemblyReference.cache
+D:\WorkZone\201501\Training\CSharpPerformance\PerformanceConsole\obj\Debug\PerformanceConsole.exe
+D:\WorkZone\201501\Training\CSharpPerformance\PerformanceConsole\obj\Debug\PerformanceConsole.pdb
+D:\WorkZone\201501\Training\CSharpPerformance\PerformanceConsole\bin\Debug\PerformanceConsole.exe
+D:\WorkZone\201501\Training\CSharpPerformance\PerformanceConsole\bin\Debug\PerformanceConsole.pdb
+D:\WorkZone\201501\Training\CSharpPerformance\PerformanceConsole\obj\Debug\PerformanceConsole.csprojResolveAssemblyReference.cache
+d:\Users\hejun\Desktop\Wind\CSharpPerformance\PerformanceConsole\obj\Debug\PerformanceConsole.exe
+d:\Users\hejun\Desktop\Wind\CSharpPerformance\PerformanceConsole\obj\Debug\PerformanceConsole.pdb
