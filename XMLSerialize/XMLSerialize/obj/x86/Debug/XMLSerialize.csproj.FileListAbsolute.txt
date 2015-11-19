@@ -1,5 +1,0 @@
-d:\Users\hejun\Desktop\XMLSerialize\XMLSerialize\bin\Debug\XMLSerialize.exe
-d:\Users\hejun\Desktop\XMLSerialize\XMLSerialize\bin\Debug\XMLSerialize.pdb
-d:\Users\hejun\Desktop\XMLSerialize\XMLSerialize\obj\x86\Debug\XMLSerialize.exe
-d:\Users\hejun\Desktop\XMLSerialize\XMLSerialize\obj\x86\Debug\XMLSerialize.pdb
-d:\Users\hejun\Desktop\XMLSerialize\XMLSerialize\obj\x86\Debug\XMLSerialize.csprojResolveAssemblyReference.cache

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="GreetingService"
+           targetNamespace="http://soa.ctrip.com/framework/soa/greetingservice/v1"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           xmlns="http://soa.ctrip.com/framework/soa/greetingservice/v1"
+           xmlns:ns="http://soa.ctrip.com/framework/soa/greetingservice/v1"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:common="http://soa.ctrip.com/common/types/v1" >
+
+  
+  <xs:import id="SOACommonTypes" schemaLocation="CTripSOACommonTypes_V1.0.0.xsd"
+           namespace="http://soa.ctrip.com/common/types/v1"></xs:import>
+  
+  <xs:element name="GreetingAsyncRequest" type="GreetingRequestType" />
+  <xs:element name="GreetingAsyncResponse" type="GreetingResponseType" />
+  
+  <xs:complexType name="GreetingRequestType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GreetingResponseType">
+    <xs:sequence>
+      <xs:element name="GreetingResult" type="xs:string"/>
+      <xs:element name="ResponseStatus" type="common:ResponseStatusType"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

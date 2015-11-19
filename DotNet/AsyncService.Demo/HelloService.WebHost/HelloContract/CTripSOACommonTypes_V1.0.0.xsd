@@ -1,0 +1,650 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CTripSOACommonTypes"
+    targetNamespace="http://soa.ctrip.com/common/types/v1"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified"
+    xmlns="http://soa.ctrip.com/common/types/v1"
+    xmlns:ns="http://soa.ctrip.com/common/types/v1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:complexType name="CommonRequestType">
+    <xs:annotation>
+      <xs:documentation>
+        Common type definition of the request payload, concrete request types may choose to include this
+        common type for optional versioning and output selecting requirements.
+        The recommended naming convention we use for the concrete type names is the name
+        of the service (the verb or call name) followed by "RequestType": VerbNameRequestType
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Version" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            The version number of the API code that you are
+            programming against (e.g., 1.2.0). If not set, defaults to latest version.
+            Whether and how this field is leveraged depends on specific service.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <RequiredInput>Conditionally</RequiredInput>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OutputSelector" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            You can use the OutputSelector field to restrict the data returned by this call.
+            When you make a call such as GetItem that retrieves data from ctrip service,
+            the OutputSelector field is useful for restricting the data returned.
+            This field makes the call response easier to use, especially when a large payload
+            would be returned. If you use the OutputSelector field, the output data
+            will include only the fields you specified in the request.
+            For example, if you are using GetItem and you want the item data
+            in the response to be restricted to the ViewItemURL
+            (the URL where a user can view the listing) and BookItNowPrice, then
+            within the GetItem request, specify those output fields.
+            The output selecting logic is handled uniformly at SOA framework level.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <RequiredInput>No</RequiredInput>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ResponseStatusType">
+    <xs:annotation>
+      <xs:documentation>
+        Response status type definition of a response payload. Per ctrip SOA policy, all
+        concrete response types must include this response status type as a root element with element name 'ResponseStatus'.
+        This is requreied for unified response status/error handling at framework level.
+        The recommended naming convention we use for the concrete type names is the name
+        of the service (the verb or call name) followed by "ResponseType": VerbNameResponseType
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Timestamp" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>
+            This value represents the date and time when a ctrip service processed the
+            request. The value of this element is set by framework automatically,
+            value set by serivce implementation will be overwritten.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Always</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Ack" type="ns:AckCodeType">
+        <xs:annotation>
+          <xs:documentation>
+            Indicates whether the call was successfully processed by ctrip.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Always</Returned>
+              <AllValuesExcept>PartialFailure</AllValuesExcept>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Errors" type="ns:ErrorDataType" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            A list of framework, validation or service-level errors or warnings (if any) that were raised
+            when a ctrip service processed the request.
+            Only returned if there were warnings or errors.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Conditionally</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Build" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            This refers to the particular software build that ctrip service used when
+            processing the request and generating the response. This includes the
+            version number plus additional information.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Always</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Version" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            The version of service used to process the request.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Always</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Extension" type="ns:ExtensionType" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            Reserved for future extension.
+          </xs:documentation>
+          <xs:appinfo>
+            <NoCalls/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="AckCodeType">
+    <xs:annotation>
+      <xs:documentation>
+        AckCodeType - Type declaration to be used by other schema. This code identifies
+        the acknowledgement code types that ctrip could use to communicate the status of
+        processing a (request) message to a client. This code would be used as part
+        of a response message that contains a framework, validation or service-level
+        acknowledgement element.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Success">
+        <xs:annotation>
+          <xs:documentation>
+            (out) Request processing succeeded
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Failure">
+        <xs:annotation>
+          <xs:documentation>
+            (out) Request processing failed
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Warning">
+        <xs:annotation>
+          <xs:documentation>
+            (out) Request processing completed with warning information
+            being included in the response message
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PartialFailure">
+        <xs:annotation>
+          <xs:documentation>
+            (out) Request processing completed with some failures.
+            See the Errors data to determine which portions of the request failed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="ErrorDataType">
+    <xs:annotation>
+      <xs:documentation>
+        This is serivce, validation or framework-level error.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Message" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            A brief description of the condition that raised the error.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Conditionally</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ErrorCode" type="xs:token" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            A unique code that identifies the particular error condition that occurred.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Conditionally</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="StackTrace" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            StackTrace of exception causing this error, only used in debug mode.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Conditionally</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SeverityCode" type="ns:SeverityCodeType">
+        <xs:annotation>
+          <xs:documentation>
+            Indicates whether the reported problem is fatal (an error) or is less-
+            severe (a warning). Review the error message details for information on
+            the cause.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Conditionally</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ErrorFields" type="ns:ErrorFieldType" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            Some warning and error messages return one or more variables that
+            contain contextual information about the error. This is often the
+            field or value that triggered the error.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Conditionally</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ErrorClassification" type="ns:ErrorClassificationCodeType">
+        <xs:annotation>
+          <xs:documentation>
+            API errors are divided between three classes: service errors, validation errors and framework errors.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Conditionally</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ErrorFieldType">
+    <xs:annotation>
+      <xs:documentation>
+        A variable that contains specific information about the context of this error.
+        For example, in request validation failure case,
+        the problematic field name might be returned as an error field.
+        Use error fields to flag fields that users need to correct.
+        Also use error fields to distinguish between errors when multiple
+        errors are returned.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="FieldName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            The name of the field caused the error.
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Conditionally</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ErrorCode" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Error code
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Conditionally</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Message" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Error message
+          </xs:documentation>
+          <xs:appinfo>
+            <CallInfo>
+              <AllCalls/>
+              <Returned>Conditionally</Returned>
+            </CallInfo>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="SeverityCodeType">
+    <xs:annotation>
+      <xs:documentation>
+        SeverityCodeType - Type declaration to be used by other schema. This code
+        identifies the severity of an API error. A code indicates whether there is an API-
+        level error or warning that needs to be communicated to the client.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Error">
+        <xs:annotation>
+          <xs:documentation>
+            (out) The request that triggered the error was not processed
+            successfully. When a serious framework, validation or service-level error occurs, the error
+            is returned instead of the business data.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Warning">
+        <xs:annotation>
+          <xs:documentation>
+            (out) The request was processed successfully, but something occurred
+            that may affect your application or the user. For example, ctrip service may have
+            changed a value the user sent in. In this case, ctrip service returns a normal,
+            successful response and also returns the warning.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ErrorClassificationCodeType">
+    <xs:annotation>
+      <xs:documentation>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="ServiceError">
+        <xs:annotation>
+          <xs:documentation>
+            Indicates that an error has occurred in the service implementation, such as business logic error or other backend error.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ValidationError">
+        <xs:annotation>
+          <xs:documentation>
+            Indicates that an error has occurred because of framework-level request validation failure.
+            This is usually because client consumer has attempted to submit invalid data (or missing data)
+            in the request when making API call.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FrameworkError">
+        <xs:annotation>
+          <xs:documentation>
+            Indicates that an error has occurred in the ctrip soa framework(CServiceStack), such as a serialization/descrialization failure.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SLAError">
+        <xs:annotation>
+          <xs:documentation>
+            Indicates that a ctrip service is unable to meet a specified service level agreement.
+            typical cases that will cause this error including: 1) continues high service call latency;
+            2) continues high service call error rate, in these cases, to avoid further service deterioration,
+            the service framework will enter into a self-protecting mode, by tripping the service call circuit
+            and return SLAError to clients. Later, when the situation improves, the service framework will
+            close the service call circuit again and continue to serve the clients.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="ExtensionType">
+    <xs:annotation>
+      <xs:documentation>
+        Reserved for future use.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Id" type="xs:positiveInteger">
+        <xs:annotation>
+          <xs:documentation>
+            Reserved for future use.
+          </xs:documentation>
+          <xs:appinfo>
+            <NoCalls/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Version" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Reserved for future use.
+          </xs:documentation>
+          <xs:appinfo>
+            <NoCalls/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ContentType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Reserved for future use.
+          </xs:documentation>
+          <xs:appinfo>
+            <NoCalls/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Reserved for future use.
+          </xs:documentation>
+          <xs:appinfo>
+            <NoCalls/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PaginationInputType">
+    <xs:annotation>
+      <xs:documentation>
+        Controls the pagination of the result set. Child elements specify the maximum
+        number of items to return per call and which page of data to return.
+        Controls which items are returned in the response, but does not control
+        the details associated with the returned items.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PageNumber" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies which subset of data (or "page") to return in the call
+            response. The number of data pages is determined by the total number of
+            items matching the request search criteria (returned in
+            paginationOutput.totalEntries) divided by the number of entries to
+            display in each response (entriesPerPage). You can return max number of
+            pages of the result set by issuing multiple requests and specifying,
+            in sequence, the pages to return.
+            Specify a positive value equal to or lower than the number of pages available (which you
+            determine by examining the results of your initial request).
+          </xs:documentation>
+          <xs:appinfo>
+            <Default>1</Default>
+            <Min>1</Min>
+            <Max>API specific</Max>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="EntriesPerPage" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>
+            Specifies the maximum number of entries to return in a single call. If
+            the number of entries found on the specified pageNumber is less than the
+            value specified here, the number of items returned will be less than the
+            value of entriesPerPage. This indicates the end of the result set.
+          </xs:documentation>
+          <xs:appinfo>
+            <Default>100 recommended</Default>
+            <Min>1</Min>
+            <Max>API specific</Max>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PaginationOutputType">
+    <xs:annotation>
+      <xs:documentation>
+        Shows the pagination data for the item search. Child elements include the
+        page number returned, the maximum entries returned per page, the total number
+        of pages that can be returned, and the total number of items that match the
+        search criteria.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PageNumber" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>
+            The subset of item data returned in the current response. Search results
+            are divided into sets, or "pages," of item data. The number of pages is
+            equal to the total number of items matching the search criteria divided
+            by the value specified for entriesPerPage in the request. The response
+            for a request contains one "page" of item data.
+            &lt;br&gt; &lt;br&gt;
+            This returned value indicates the page number of item data returned (a
+            subset of the complete result set). If this field contains 1, the
+            response contains the first page of item data (the default). If the value
+            returned in totalEntries is less than the value for entriesPerPage,
+            pageNumber returns 1 and the response contains the entire result set.
+            &lt;br&gt; &lt;br&gt;
+            The value of pageNumber is normally equal to the value input for
+            paginationInput.pageNumber. However, if the number input for pageNumber
+            is greater than the total possible pages of output, ctrip returns the last
+            page of item data in the result set, and the value for pageNumber is set
+            to the respective (last) page number.
+          </xs:documentation>
+          <xs:appinfo>
+            <Default/>
+            <Min>0</Min>
+            <Max>100</Max>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="EntriesPerPage" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>
+            The maximum number of items that can be returned in the response. This
+            number is always equal to the value input for
+            paginationInput.entriesPerPage.
+            &lt;br&gt; &lt;br&gt;
+            The end of the result set has been reached if the number specified for
+            entriesPerPage is greater than the number of items found on the specified
+            pageNumber. In this case, there will be fewer items returned than the
+            number specified in entriesPerPage. This can be determined by comparing
+            the entriesPerPage value with the value returned in the count attribute
+            for the searchResult field.
+          </xs:documentation>
+          <xs:appinfo>
+            <Default/>
+            <Min>1</Min>
+            <Max>100</Max>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TotalPages" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>
+            The total number of pages of data that could be returned by repeated
+            search requests. Note that if you modify the value of
+            inputPagination.entriesPerPage in a request, the value output for
+            totalPages will change. A value of "0" is returned if service does not find
+            any items that match the search criteria.
+          </xs:documentation>
+          <xs:appinfo>
+            <Default/>
+            <Min>0</Min>
+            <Max/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TotalEntries" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>
+            The total number of items found that match the search criteria in your
+            request. Depending on the input value for entriesPerPage, the response
+            might include only a portion (a page) of the entire result set. A value
+            of "0" is returned if service does not find any items that match the search
+            criteria.
+          </xs:documentation>
+          <xs:appinfo>
+            <Default/>
+            <Min>0</Min>
+            <Max/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="CheckHealthRequest" type="ns:CheckHealthRequestType"/>
+  <xs:complexType name="CheckHealthRequestType">
+    <xs:annotation>
+      <xs:documentation>
+        Check the health of the service. Per CTrip SOA policy,
+        CheckHealth API must be implemented by service implementation.
+      </xs:documentation>
+      <xs:appinfo>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:complexType>
+
+  <xs:element name="CheckHealthResponse" type="ns:CheckHealthResponseType"/>
+  <xs:complexType name="CheckHealthResponseType">
+    <xs:annotation>
+      <xs:documentation>
+        The health status of the serivce. Per CTrip SOA policy,
+        CheckHealth API must be implemented by service implementation.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ResponseStatus" type="ns:ResponseStatusType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GenericErrorResponseType">
+    <xs:annotation>
+      <xs:documentation>
+        Generic error response container. Only used by CServiceStack framework internally.
+        Please don't use this type in your service implementation.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ResponseStatus" type="ns:ResponseStatusType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
