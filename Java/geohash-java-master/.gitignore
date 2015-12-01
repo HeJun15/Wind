@@ -1,0 +1,10 @@
+bin
+target
+release
+*.iml
+*.ipr
+*.iws
+*~
+*.new
+*.old
+/.idea
